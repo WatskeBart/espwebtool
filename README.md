@@ -1,4 +1,4 @@
-# ESP Web Tool
+# [ESP Web Tool](https://watskebart.github.io/espwebtool)
 A web app to flash your ESP32 or ESP8266 through your browser. Open-Source, free, and easy to use.
 
 ## Credits
