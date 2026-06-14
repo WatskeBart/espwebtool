@@ -8,31 +8,21 @@
   <meta name="description" content="Flash your ESP32 or ESP8266 through your browser. Open-Source, free, and easy to use." />
   <meta name="keywords" content="Web Serial, ESPtool, Flasher, ESP8266, ESP32, ESP32-S2, ESP32-S3, ESP32-C3" />
   <meta name="author" content="WatskeBart" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <link rel="icon" href="%PUBLIC_URL%/logo512.png" />
-  <link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/logo512.png" />
+  <link rel="stylesheet" href="/index.css" />
   <title>ESPWebTool</title>
 
-  <script module>
+  <script type="module">
     window.esptoolPackage = import("https://unpkg.com/esp-web-flasher@5.1.4/dist/web/index.js?module");
   </script>
-  
+
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
+  <script type="module" src="/src/index.jsx"></script>
 </body>
 
 </html>

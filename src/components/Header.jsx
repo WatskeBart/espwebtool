@@ -52,15 +52,6 @@ const Header = (props) => {
                     Help
                 </Button>
 
-                <Button
-                    //variant='contained'
-                    //color='success'
-                    sx={{ color: '#fff' }}
-                    href='https://huhn.me/'
-                    target='_blank'
-                    endIcon={<OpenInNewIcon />}>
-                    More Tools
-                </Button>
             </Toolbar>
         </AppBar>
     )

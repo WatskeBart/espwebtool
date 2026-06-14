@@ -67,22 +67,17 @@ const Output = (props) => {
                     label="Output"
 
                 />
-
-                { /* Button */}
-                {visible &&
-                    <Button
-                        endIcon={<OpenInNewIcon />}
-                        sx={{ float: 'right' }}
-                        href='https://serial.huhn.me/'
-                    >
-                        Terminal
-                    </Button>
-                }
             </>
 
             { /* Actual Output */}
             {visible &&
-                <Box className={styles.box}>
+                <Box
+                    className={styles.box}
+                    sx={{
+                        background: (theme) => theme.palette.mode === 'dark' ? '#1a1a1a' : '#eee',
+                        color: (theme) => theme.palette.mode === 'dark' ? '#00ff41' : 'inherit',
+                    }}
+                >
                     <code className={styles.code}>
 
                         { /* Lines */}
