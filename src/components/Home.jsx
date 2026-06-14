@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Box from '@mui/material/Grid'
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
@@ -14,15 +13,8 @@ import SettingsIcon from '@mui/icons-material/Settings'
 
 const Home = (props) => {
     return (
-        <Grid
-            container
-            spacing={0}
-            direction='column'
-            alignItems='center'
-            justifyContent='center'
-        >
-            <Grid item xs={3}>
-
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Box>
                 {props.supported() ?
                     <Box align='center'>
                         <Box>
@@ -71,9 +63,8 @@ const Home = (props) => {
                         </a>
                     </Alert>
                 }
-            </Grid>
-
-        </Grid>
+            </Box>
+        </Box>
     )
 }
 

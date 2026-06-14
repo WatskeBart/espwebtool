@@ -11,7 +11,8 @@ import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import DeleteIcon from '@mui/icons-material/Delete'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RestartAltIcon from '@mui/icons-material/RestartAlt'
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
 
 import styles from './FileList.module.css'
 
@@ -27,6 +28,12 @@ const FileList = (props) => {
     const reset = () => {
         const newUploads = defaultFiles(props.chipName)
 
+        saveFiles(newUploads)
+        props.setUploads(newUploads)
+    }
+
+    const resetAll = () => {
+        const newUploads = [{ offset: '0' }]
         saveFiles(newUploads)
         props.setUploads(newUploads)
     }
@@ -81,9 +88,19 @@ const FileList = (props) => {
     return (
         <Box textAlign='center' className={styles.box}>
             {props.uploads.map((file, i) =>
-                <Grid container spacing={0} className={styles.fileItem} key={i}>
+                <Grid
+                    container
+                    spacing={0}
+                    className={styles.fileItem}
+                    key={i}
+                    sx={{
+                        background: (theme) => theme.palette.mode === 'dark'
+                            ? (i % 2 === 0 ? '#2a2a2a' : '#1a1a1a')
+                            : (i % 2 === 0 ? '#efefef' : 'transparent'),
+                    }}
+                >
                     {/* Offset */}
-                    <Grid item xs={2} className={styles.fileOffset}>
+                    <Grid size={2} className={styles.fileOffset}>
                         <TextField
                             label='0x'
                             variant='outlined'
@@ -95,7 +112,7 @@ const FileList = (props) => {
                     </Grid>
 
                     {/* File Name */}
-                    <Grid item xs={9}>
+                    <Grid size={9}>
                         {file.fileName ?
                             <Typography className={styles.fileName}>
                                 {file.fileName}
@@ -113,7 +130,7 @@ const FileList = (props) => {
                     </Grid>
 
                     {/* Delete */}
-                    <Grid item xs={1}>
+                    <Grid size={1}>
                         <IconButton
                             color='error'
                             onClick={() => deleteFile(i)}
@@ -130,12 +147,17 @@ const FileList = (props) => {
 
             {/* Add File */}
             <Grid container spacing={.5}>
-                <Grid item xs={6} sx={{ textAlign: 'left' }}>
+                <Grid size={4} sx={{ textAlign: 'left' }}>
                     <Button color='error' component='label' size='large' onClick={reset} endIcon={<RestartAltIcon />}>
                         Reset
                     </Button>
                 </Grid>
-                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                <Grid size={4} sx={{ textAlign: 'center' }}>
+                    <Button color='warning' size='large' onClick={resetAll} endIcon={<DeleteSweepIcon />}>
+                        Reset All
+                    </Button>
+                </Grid>
+                <Grid size={4} sx={{ textAlign: 'right' }}>
                     <Button color='primary' component='label' size='large' onClick={addFile} endIcon={<AddBoxIcon />}>
                         Add
                     </Button>

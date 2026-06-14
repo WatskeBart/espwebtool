@@ -6,8 +6,8 @@ import Button from '@mui/material/Button'
 
 const Buttons = (props) => {
     return (
-        <Grid container spacing={1} direction='row' justifyContent='space-between' alignItems='flex-start'>
-            <Grid item>
+        <Grid container spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <Grid>
                 <Button
                     variant='outlined'
                     color='error'
@@ -18,7 +18,7 @@ const Buttons = (props) => {
                 </Button>
             </Grid>
 
-            <Grid item>
+            <Grid>
                 <Button
                     variant='contained'
                     color='success'

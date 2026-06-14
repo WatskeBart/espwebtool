@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -22,7 +22,7 @@ import { connectESP, formatMacAddr, sleep, loadFiles, supported } from './lib/es
 import { loadSettings, defaultSettings } from './lib/settings'
 
 const App = () => {
-  const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('darkMode') === 'true')
+  const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('darkMode') !== 'false')
 
   const toggleDarkMode = () => {
     setDarkMode(prev => {
@@ -81,7 +81,7 @@ const App = () => {
       })
       toast.update('connecting', {
         render: 'Connecting...',
-        type: toast.TYPE.INFO,
+        type: 'info',
         autoClose: false
       })
 
@@ -97,7 +97,7 @@ const App = () => {
       setConnected(true)
       toast.update('connecting', {
         render: 'Connected 🚀',
-        type: toast.TYPE.SUCCESS,
+        type: 'success',
         autoClose: 3000
       })
 
@@ -118,7 +118,7 @@ const App = () => {
 
       toast.update('connecting', {
         render: shortErrMsg,
-        type: toast.TYPE.ERROR,
+        type: 'error',
         autoClose: 3000
       })
 
@@ -149,10 +149,10 @@ const App = () => {
 
       clearInterval(interval)
       addOutput(`Finished. Took ${Date.now() - stamp}ms to erase.`)
-      toast.update('erase', { render: 'Finished erasing memory.', type: toast.TYPE.INFO, autoClose: 3000 })
+      toast.update('erase', { render: 'Finished erasing memory.', type: 'info', autoClose: 3000 })
     } catch (e) {
       addOutput(`ERROR!\n${e}`)
-      toast.update('erase', { render: `ERROR!\n${e}`, type: toast.TYPE.ERROR, autoClose: 3000 })
+      toast.update('erase', { render: `ERROR!\n${e}`, type: 'error', autoClose: 3000 })
       console.error(e)
     } finally {
       setFlashing(false)
@@ -232,57 +232,47 @@ const App = () => {
     <Box sx={{ minWidth: '25rem' }}>
       <Header sx={{ mb: '1rem' }} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
 
-      <Grid container spacing={1} direction='column' justifyContent='space-around' alignItems='center' sx={{ minHeight: 'calc(100vh - 116px)' }}>
+      <Stack spacing={1} sx={{ minHeight: 'calc(100vh - 116px)', justifyContent: 'space-around', alignItems: 'center' }}>
 
         {/* Home Page */}
         {!connected && !connecting &&
-          <Grid item>
-            <Home
-              connect={clickConnect}
-              supported={supported}
-              openSettings={() => setSettingsOpen(true)}
-            />
-          </Grid>
+          <Home
+            connect={clickConnect}
+            supported={supported}
+            openSettings={() => setSettingsOpen(true)}
+          />
         }
 
-        {/* Home Page */}
+        {/* Connecting */}
         {!connected && connecting &&
-          <Grid item>
-            <Typography variant='h3' component='h2' sx={{ color: '#aaa' }}>
-              Connecting...
-            </Typography>
-          </Grid>
+          <Typography variant='h3' component='h2' sx={{ color: '#aaa' }}>
+            Connecting...
+          </Typography>
         }
 
         {/* FileUpload Page */}
         {connected &&
-          <Grid item>
-            <FileList
-              uploads={uploads}
-              setUploads={setUploads}
-              chipName={chipName}
-            />
-          </Grid>
+          <FileList
+            uploads={uploads}
+            setUploads={setUploads}
+            chipName={chipName}
+          />
         }
 
         {/* Erase & Program Buttons */}
         {connected &&
-          <Grid item>
-            <Buttons
-              erase={() => setConfirmErase(true)}
-              program={() => setConfirmProgram(true)}
-              disabled={flashing}
-            />
-          </Grid>
+          <Buttons
+            erase={() => setConfirmErase(true)}
+            program={() => setConfirmProgram(true)}
+            disabled={flashing}
+          />
         }
 
         {/* Serial Output */}
         {supported() &&
-          <Grid item>
-            <Output received={output} />
-          </Grid>
+          <Output received={output} />
         }
-      </Grid>
+      </Stack>
 
       {/* Settings Window */}
       <Settings
