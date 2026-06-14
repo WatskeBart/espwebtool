@@ -15,7 +15,7 @@ const Footer = (props) => {
                 <Typography
                 align='center'
                 display='block'>
-                Made with ❤️ by <Link href='https://spacehuhn.com' target='_blank' underline='hover' color='inherit'>Spacehuhn</Link>
+                Modded with ❤️ by <Link href='https://github.com/WatskeBart' target='_blank' underline='hover' color='inherit'>WatskeBart</Link>
                 </Typography>
             </Box>
 
@@ -25,7 +25,7 @@ const Footer = (props) => {
                 align='center'
                 display='block'
                 sx={{ color: '#ddd' }}>
-                <Link href='https://github.com/spacehuhntech/espwebtool' target='_blank' underline='hover' color='inherit'>{version.name}</Link>
+                <Link href='https://github.com/WatskeBart/espwebtool' target='_blank' underline='hover' color='inherit'>{version.name}</Link>
             </Typography>
         </Box>
     )

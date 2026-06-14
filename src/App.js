@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import CssBaseline from '@mui/material/CssBaseline'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import Header from './components/Header'
 import Home from './components/Home'
@@ -20,6 +22,17 @@ import { connectESP, formatMacAddr, sleep, loadFiles, supported } from './lib/es
 import { loadSettings, defaultSettings } from './lib/settings'
 
 const App = () => {
+  const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('darkMode') === 'true')
+
+  const toggleDarkMode = () => {
+    setDarkMode(prev => {
+      localStorage.setItem('darkMode', String(!prev))
+      return !prev
+    })
+  }
+
+  const theme = createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })
+
   const [connected, setConnected] = React.useState(false) // Connection status
   const [connecting, setConnecting] = React.useState(false)
   const [output, setOutput] = React.useState({ time: new Date(), value: 'Click Connect to start\n' }) // Serial output
@@ -214,8 +227,10 @@ const App = () => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
     <Box sx={{ minWidth: '25rem' }}>
-      <Header sx={{ mb: '1rem' }} />
+      <Header sx={{ mb: '1rem' }} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
 
       <Grid container spacing={1} direction='column' justifyContent='space-around' alignItems='center' sx={{ minHeight: 'calc(100vh - 116px)' }}>
 
@@ -300,6 +315,7 @@ const App = () => {
       {/* Footer */}
       <Footer sx={{ mt: 'auto' }} />
     </Box>
+    </ThemeProvider>
   )
 }
 

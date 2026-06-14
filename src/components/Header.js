@@ -5,9 +5,12 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import UploadIcon from '@mui/icons-material/Upload'
 import HelpIcon from '@mui/icons-material/Help'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
 
 const Header = (props) => {
     return (
@@ -33,11 +36,17 @@ const Header = (props) => {
                     &nbsp;&nbsp;ESPWebTool
                 </Typography>
 
-                <Button
-                    //variant='contained'
-                    //color='success'
+                <IconButton
+                    onClick={props.onToggleDarkMode}
                     sx={{ color: '#fff' }}
-                    href='https://blog.spacehuhn.com/espcomm'
+                    aria-label='toggle dark mode'
+                >
+                    {props.darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+                </IconButton>
+
+                <Button
+                    sx={{ color: '#fff' }}
+                    href='https://github.com/WatskeBart/espwebtool'
                     target='_blank'
                     endIcon={<HelpIcon />}>
                     Help
@@ -59,6 +68,8 @@ const Header = (props) => {
 
 Header.propTypes = {
     sx: PropTypes.object,
+    darkMode: PropTypes.bool,
+    onToggleDarkMode: PropTypes.func,
 }
 
 export default Header
